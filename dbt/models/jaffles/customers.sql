@@ -6,7 +6,7 @@ with customers as (
 
 orders as (
 
-    select * from {{ ref('stg_orders') }} limit 5
+    select * from {{ ref('stg_orders') }} limit 50
 
 ),
 
