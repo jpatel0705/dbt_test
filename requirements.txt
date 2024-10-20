@@ -1,2 +1,3 @@
 dbt-snowflake
+dbt-core
 piperider[snowflake]
