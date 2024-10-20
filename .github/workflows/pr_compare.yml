@@ -1,0 +1,16 @@
+# GitHub workflow snippet
+name: PR with PipeRider
+
+on: [pull_request]
+
+jobs:
+  piperider-compare:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: PipeRider Compare
+      uses: InfuseAI/piperider-compare-action@v1
+
