@@ -4,3 +4,9 @@ jaffle_shop:
     dev:
       type: duckdb
       path: jaffle_shop.duckdb
+
+  target: prod
+  outputs:
+    dev:
+      type: duckdb
+      path: jaffle_shop.duckdb
