@@ -7,7 +7,7 @@ jaffle_shop:
 
   target: prod
   outputs:
-    dev:
+    prod:
       type: duckdb
       path: jaffle_shop.duckdb
 
