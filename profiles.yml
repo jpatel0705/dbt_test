@@ -10,8 +10,3 @@ jaffle_shop:
     dev:
       type: duckdb
       path: jaffle_shop.duckdb
-
-  
-  
-  
-  
