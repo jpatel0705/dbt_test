@@ -19,5 +19,5 @@ final as (
 
 )
 
-select * from final limit 11
+select * from final limit 7
 
