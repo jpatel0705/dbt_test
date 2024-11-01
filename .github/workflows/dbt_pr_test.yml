@@ -10,10 +10,35 @@ jobs:
     runs-on: ubuntu-20.04
     
     env:
+      name: pr test
+
+on:
+    pull_request:
+     types: [closed]
+     branches:
+      - "develop"
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    
+    env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_DEFAULT_REGION:  ${{ secrets.AWS_DEFAULT_REGION }}
-      ECR_URI : "938423115328.dkr.ecr.us-west-2.amazonaws.com/rsi-enterprise-data-mda-data_quality-ecr-dev"
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+      ECR: ${{ secrets.RSI_DBT_ECR }}
+    
+    steps:
+    - uses: actions/checkout@v2
+    - run: dbt deps
+    - run: |
+
+          OUTPUT=$(dbt ls --selector state:modified+ --defer --state=prod-run-artifacts)  
+          if [[ -n "$OUTPUT" ]]; then
+            dbt run --models "$OUTPUT"  
+          else
+            echo "No modified models found. Skipping dbt run."
+          fi
+
     
     steps:
     - uses: actions/checkout@v2
