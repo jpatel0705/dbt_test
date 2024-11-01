@@ -10,8 +10,3 @@ jaffle_shop:
     prod:
       type: duckdb
       path: jaffle_shop.duckdb
-
-  
-  
-  
-  
