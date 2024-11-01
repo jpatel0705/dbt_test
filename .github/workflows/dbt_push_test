@@ -1,0 +1,24 @@
+name: push test
+
+on:
+    push:
+     branches:
+      - "develop"
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION:  ${{ secrets.AWS_DEFAULT_REGION }}
+      ECR_URI : "938423115328.dkr.ecr.us-west-2.amazonaws.com/rsi-enterprise-data-mda-data_quality-ecr-dev"
+    
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+
+        dbt compile  
+        dbt ls --select state:modified+ --defer --state=prod-run-artifacts 
+        
+        dbt run --select state:modified+ --defer --state=prod-run-artifacts 
